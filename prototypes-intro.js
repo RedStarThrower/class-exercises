@@ -26,7 +26,7 @@ Array.prototype.contains = function(element) {
 	return this.indexOf(element) !== -1
 }
 
-console.log(names.contains('boaz'))
+//console.log(names.contains('boaz'))
 
 //Contain for string
 
@@ -34,4 +34,25 @@ String.prototype.contains = Array.prototype.contains
 
 var string = "string"
 
-console.log(string.contains("t"))
+//console.log(string.contains("t"))
+
+// Adding methods to the constructor prototype
+
+var Horse = function(inputName, inputBreed) {
+	this.name = inputName
+	this.breed = inputBreed
+}
+
+ 
+Horse.prototype = { // <= creating different methods for the Horse prototypes
+	speak: function() {
+		return ("Neeeigh, it is I, " + this.name)
+	},
+	 // <= don't forger the comma, since you are in an object
+	playPiano: function() {
+		return "sweet jams"
+	}
+}
+
+var misterEd = new Horse("Ed", "mister")
+console.log(misterEd.speak())
