@@ -1,4 +1,4 @@
-// Introducing Constructors and .this (reference to the object we're currently in)
+// ----- Introducing Constructors and .this (reference to the object we're currently in) -----
 
 var Person = function(inputName, inputGender) {
     this.homePlanet = "Earth"
