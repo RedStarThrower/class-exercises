@@ -1,0 +1,40 @@
+* {
+	box-sizing: border-box;
+}
+
+input {
+	height: 30px;
+	width: 200px;
+	position: relative;
+	display: inline-block;
+	margin: auto;
+}
+
+.myButton {
+    width: 200px;
+    height: 40px;
+    vertical-align: top;
+    display: block;
+    -moz-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background-color: teal;
+    border: 1px solid #dcdcdc;
+    cursor: pointer;
+    color: white;
+    font-size: 15px;
+    padding: 15px 24px;
+    text-decoration: none;
+    text-align: center;
+    line-height: 15px;
+}
+
+.myButton:hover {
+    background-color: white;
+    color: teal;
+}
+
+.myButton:active {
+    position: relative;
+    top: 1px;
+}
