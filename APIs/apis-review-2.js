@@ -31,7 +31,7 @@ var handleData = function(jsonData) { // <= Step 3: Set up function to handle da
         //console.log(jsonObj)
         var countryName = jsonObj['name']
         var countryDemonym = jsonObj['demonym']
-        var nativeName = jsonObj['nativeName'] // <= store for Level IV
+        var nativeName = jsonObj['nativeName'] // <= store for Level IV (will have to build an object for each country)
          //console.log(nativeName)
         demonymTable[countryName] = countryDemonym         
     }
