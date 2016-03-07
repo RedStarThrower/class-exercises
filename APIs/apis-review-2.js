@@ -16,7 +16,7 @@ inputEl.value = "Search country..."
 var denButton = document.querySelector('#demonym')
 var orthButton = document.querySelector('#orthography')
 
-window.demonymTable = {} // <= Creates a global variable as a window property that is available for robust inspection on the console (ex: manipulating object, trying new methods )
+window.demonymTable = {} // <= Level II complete; Creates a global variable as a window property that is available for robust inspection on the console (ex: manipulating object, trying new methods )
 
 // Functions
 
@@ -36,7 +36,7 @@ var handleData = function(jsonData) { // <= Step 3: Set up function to handle da
         demonymTable[countryName] = countryDemonym         
     }
     console.log('demonym table built') // <= shows that the function is working 
-    console.log(demonymTable) 
+    console.log(demonymTable) // <= Level I complete
     inputEl.addEventListener("keydown", searchDemonym) //<= prevents user from entering query before data has gotten back
 }
 
@@ -46,7 +46,7 @@ var searchDemonym = function(keyEvent) { // <= Step 4: Create a search function 
         var countrySearched = inputEl.value
         inputEl.value = ""
         container.innerHTML = '<p class ="countryName">' + demonymTable[countrySearched] + '</p>'
-    } // <= gootd practice to insert tags into HTML in order to style them later
+    } // <= good practice to insert tags into HTML in order to style them later; Level III complete
 }
 
 var promise = requester(countryUrl) // <= everybody, get in the car to go get the data
