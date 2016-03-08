@@ -6,49 +6,68 @@
 
 // Variables
 
-var countryUrl = "https://restcountries.eu/rest/v1/all" // <= Step 1: Set up variables
+var countryUrl = "https://restcountries.eu/rest/v1/all"
 
 var container = document.querySelector('#container')
 
 var inputEl = document.querySelector('input')
 inputEl.value = "Search country..."
 
-var denButton = document.querySelector('#demonym')
-var orthButton = document.querySelector('#orthography')
+var demButton = document.querySelector('#dem-button')
+var orthButton = document.querySelector('#name-button')
 
-window.demonymTable = {} // <= Level II complete; Creates a global variable as a window property that is available for robust inspection on the console (ex: manipulating object, trying new methods )
+window.demonymTable = {} // <= Creates a global variable as a window property that is available for robust inspection on the console (ex: manipulating object, trying new methods )
 
 // Functions
 
-var requester = function(countryUrl) { // <= Step 2: Set up request; returns a PROMISE, *not* data
-	 return $.getJSON(countryUrl)
+var requester = function(countryUrl) { // <= Set up request; returns a PROMISE, *not* data
+    return $.getJSON(countryUrl)
 }
 
-var handleData = function(jsonData) { // <= Step 3: Set up function to handle data and create the table
+function Country(inputDemonym, inputNativeName) { // <= create a function to make an object for each country
+    this.demonym = inputDemonym;
+    this.nativeName = inputNativeName;
+}
+
+var handleData = function(jsonData) { // <= Set up function to handle data and create the table
     //console.log(jsonData)
-    for (var i = 0; i < jsonData.length; i++) {  
-        var jsonObj = jsonData[i] 
+    for (var i = 0; i < jsonData.length; i++) {
+        var jsonObj = jsonData[i]
         //console.log(jsonObj)
         var countryName = jsonObj['name']
         var countryDemonym = jsonObj['demonym']
-        var nativeName = jsonObj['nativeName'] // <= store for Level IV (will have to build an object for each country)
-         //console.log(nativeName)
-        demonymTable[countryName] = countryDemonym         
+        var nativeName = jsonObj['nativeName'] //<=  Identify key/value for the native name
+        var countryObj = new Country(countryDemonym, nativeName) //<= create an object for each country in the loop 
+        demonymTable[countryName] = countryObj //<=  Place all the objects into the demonym table 
     }
     console.log('demonym table built') // <= shows that the function is working 
-    console.log(demonymTable) // <= Level I complete
-    inputEl.addEventListener("keydown", searchDemonym) //<= prevents user from entering query before data has gotten back
+    console.log(demonymTable) // <= enjoy tour new table!
+    inputEl.addEventListener("focus", function() { inputEl.value = "" }) // <= gets rid of initial value when clicked
+    inputEl.addEventListener("mouseout", processInput)
+    //<= processes search when the mouse is out of the search bar
 }
 
-var searchDemonym = function(keyEvent) { // <= Step 4: Create a search function that take the country name searched and looks it up in the demonym table
+//Search Table for Country
+
+var demSearch = function(countrySearched) {
+    container.innerHTML = '<p class="demonym">' + demonymTable[countrySearched].demonym + "</p>"
+}
+
+var nativeNameSearch = function(countrySearched) {
+    container.innerHTML = '<p class="demonym">' + demonymTable[countrySearched].nativeName + "</p>"
+}
+var processInput = function(keyEvent) { // <= Create a search function that takes the country name searched and looks it up in the demonym table
     var inputEl = keyEvent.target
-    if (keyEvent.keyCode === 13) {
-        var countrySearched = inputEl.value
-        inputEl.value = ""
-        container.innerHTML = '<p class ="countryName">' + demonymTable[countrySearched] + '</p>'
-    } // <= good practice to insert tags into HTML in order to style them later; Level III complete
+    var countrySearched = inputEl.value
+    //console.log(countrySearched) // <= Make sure the query is being grabbed
+    demButton.addEventListener("click", function() {
+        demSearch(countrySearched) //<= call this function with the country searched as input, but only after the button clicked
+    })
+    orthButton.addEventListener("click", function() {
+        nativeNameSearch(countrySearched) 
+    })    
 }
 
 var promise = requester(countryUrl) // <= everybody, get in the car to go get the data
-promise.then(handleData) // <= takes the callback function and puts it into position 
+promise.then(handleData) // <= takes the callback function and puts it into position
 

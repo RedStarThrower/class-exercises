@@ -19,8 +19,8 @@ var showData = function(jsonData) {	// <= Step 2: Create function that logs JSON
 		var countryDemonym = jsonObj['demonym']
 		demonymTable[countryName] = countryDemonym // <= Step 7: Write new key=value pairs into new object
 	}
-	console.log('demonym table built') // <= shows that the function is workin 
-	console.log(demonymTable) // <= Step 8: Your resulting object will appear in the console!
+	//console.log('demonym table built') // <= shows that the function is workin 
+	//console.log(demonymTable) // <= Step 8: Your resulting object will appear in the console!
 }
 
 
