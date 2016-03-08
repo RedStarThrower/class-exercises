@@ -13,8 +13,11 @@ var container = document.querySelector('#container')
 var inputEl = document.querySelector('input')
 inputEl.value = "Search country..."
 
+var buttonContainer = document.querySelector('#buttons')
 var demButton = document.querySelector('#dem-button')
 var orthButton = document.querySelector('#name-button')
+
+
 
 window.demonymTable = {} // <= Creates a global variable as a window property that is available for robust inspection on the console (ex: manipulating object, trying new methods )
 
@@ -33,41 +36,43 @@ var handleData = function(jsonData) { // <= Set up function to handle data and c
     //console.log(jsonData)
     for (var i = 0; i < jsonData.length; i++) {
         var jsonObj = jsonData[i]
-        //console.log(jsonObj)
+            //console.log(jsonObj)
         var countryName = jsonObj['name']
         var countryDemonym = jsonObj['demonym']
-        var nativeName = jsonObj['nativeName'] //<=  Identify key/value for the native name
+        var countryNativeName = jsonObj['nativeName'] //<=  Identify key/value for the native name
         var countryObj = new Country(countryDemonym, nativeName) //<= create an object for each country in the loop 
         demonymTable[countryName] = countryObj //<=  Place all the objects into the demonym table 
+
+        // demonymTable[countryName] = {demonym: countryDemonym, nativeName: countryNativeName} //<= Alternatively, use literal notation
     }
     console.log('demonym table built') // <= shows that the function is working 
     console.log(demonymTable) // <= enjoy tour new table!
     inputEl.addEventListener("focus", function() { inputEl.value = "" }) // <= gets rid of initial value when clicked
-    inputEl.addEventListener("mouseout", processInput)
-    //<= processes search when the mouse is out of the search bar
 }
 
 //Search Table for Country
 
-var demSearch = function(countrySearched) {
+var demSearch = function(countrySearched) { // <= writes the demonym of the searched country into the container
     container.innerHTML = '<p class="demonym">' + demonymTable[countrySearched].demonym + "</p>"
 }
 
-var nativeNameSearch = function(countrySearched) {
+var nativeNameSearch = function(countrySearched) { // <= writes the native name of the searched country into the container
     container.innerHTML = '<p class="demonym">' + demonymTable[countrySearched].nativeName + "</p>"
 }
-var processInput = function(keyEvent) { // <= Create a search function that takes the country name searched and looks it up in the demonym table
-    var inputEl = keyEvent.target
+var handleButtons = function(clickEvent) {
+    var buttonClicked = clickEvent.target
+    var buttonVal = buttonClicked.value
     var countrySearched = inputEl.value
-    //console.log(countrySearched) // <= Make sure the query is being grabbed
-    demButton.addEventListener("click", function() {
-        demSearch(countrySearched) //<= call this function with the country searched as input, but only after the button clicked
-    })
-    orthButton.addEventListener("click", function() {
-        nativeNameSearch(countrySearched) 
-    })    
+    //console.log(countrySearched)
+    if (buttonVal === "demonym") {
+        demSearch(countrySearched)
+    }
+    if (buttonVal === "native") {
+        nativeNameSearch(countrySearched)
+    }
 }
+
+buttonContainer.addEventListener("click", handleButtons)
 
 var promise = requester(countryUrl) // <= everybody, get in the car to go get the data
 promise.then(handleData) // <= takes the callback function and puts it into position
-
