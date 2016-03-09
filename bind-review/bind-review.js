@@ -30,9 +30,9 @@ var experimentObj = {
 
 // Step 2: Now bind the student's study method to the "experiment object" which will yiels a new function. Invoke the new function.
 
-// "Bind" Syntax: returnedGlobalBoundFunction = function.bind(newObject) <= function can be a method on an object (ex: oldObject.method.bind(newObject))
+// "Bind" Syntax: returnedGlobalBoundFunction = function.bind(newObject) //function can be a method on an object (ex: oldObject.method.bind(newObject))
 
-var boundStudy = studentObj.study.bind(experimentObj) // now "this" is fixed ot the experiment object. boundStudy is a global function that will always do the same thing:
+var boundStudy = studentObj.study.bind(experimentObj) // now "this" is fixed to the experiment object. NETIHER OBJECTS ARE CHANGED/REWRITTEN. boundStudy is a new, global function that will always do the same thing:
 
 // var boundStudy = function(experimentObj) {
 // 	return "I am studying " + experimentObj.subject
