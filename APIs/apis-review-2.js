@@ -17,8 +17,6 @@ var buttonContainer = document.querySelector('#buttons')
 var demButton = document.querySelector('#dem-button')
 var orthButton = document.querySelector('#name-button')
 
-
-
 window.demonymTable = {} // <= Creates a global variable as a window property that is available for robust inspection on the console (ex: manipulating object, trying new methods )
 
 // Functions
