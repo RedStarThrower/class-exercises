@@ -6,7 +6,7 @@ var paramObject = {
 }
 
 var formatURLParams = function(inputObject) {
-    var paramString = "?"
+    var paramString = ""
     for (var key in inputObject) {
         paramString += '&' + key + '=' + inputObject[key]
     }
@@ -15,7 +15,7 @@ var formatURLParams = function(inputObject) {
 
 console.log(formatURLParams(paramObject)) // logs: "&query=brazil&api-key=1297364783465"
 
-// Exercise II. Step 1: Create a student object with a property called "subject" i.e.wjat they are studying. The student should have a method called "study" that return 'I am studying <the subject>'.
+// Exercise II. Step 1: Create a student object with a property called "subject" i.e. what they are studying. The student should have a method called "study" that return 'I am studying <the subject>'.
 
 var studentObj = {
     subject: "javaScript",
