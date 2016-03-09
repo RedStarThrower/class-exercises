@@ -13,7 +13,7 @@ var formatURLParams = function(inputObject) {
     return paramString.substring(1)
 }
 
-console.log(formatURLParams(paramObject)) // logs: "&query=brazil&api-key=1297364783465"
+console.log(formatURLParams(paramObject)) // logs: "query=brazil&api-key=1297364783465"
 
 // Exercise II. Step 1: Create a student object with a property called "subject" i.e. what they are studying. The student should have a method called "study" that return 'I am studying <the subject>'.
 
