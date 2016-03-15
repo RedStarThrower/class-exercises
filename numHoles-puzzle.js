@@ -23,4 +23,5 @@ var numHoles = function(inputNumber) {
     return count
 }
 
-console.log(numHoles(222886)) // <= logs "7"
+console.log(numHoles(1239624)) // <= logs "3"
+console.log(numHoles(1889616)) // <= logs "10"
