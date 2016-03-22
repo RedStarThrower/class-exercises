@@ -1,4 +1,4 @@
-// Write a function called forEach that takes two inputs, an array and a function. The function shoulf be run on each element of the array
+// PART I. Write a function called forEach that takes two inputs, an array and a function. The function shoulf be run on each element of the array
 // Example: 
 // var total = 0
 // var arr = [100, 200, 300, 400]
@@ -42,5 +42,93 @@ var htmlBuilder = function(obj) {
 forEach(objArray, htmlBuilder) // forEach has no return, so run function first, then console.log the affected global variable (htmlString in this case)
 
 //console.log(htmlString) // forEach-builder.js:44 <p class="productName">footie pajamas</p><p class="productPrice">$200</p><p class="productName">CD collection</p><p class="productPrice">$50</p>
+
+// PART II: EXAMPLE of adding a "contains" method to the String prototype
+
+var myString = "j$on"
+
+String.prototype.contains = function(char) {
+	for (var i = 0; i < this.length; i++) {
+		var thisChar = this[i]
+		if (thisChar === char) {
+			return true
+		}
+	}
+	return false
+}
+
+//console.log(myString.contains("$")) //<= logs "true"
+
+// PART III. Add a method to the array prototype called forAll (instead of "forEach", which is a reserved word for an existing function). It should take on input, a function. It should run that function on each element in the array. 
+
+var array = [2, 2345, 335, 283]
+var result = 0
+
+var incrementMore = function(number) {
+	result += number
+}
+
+Array.prototype.forAll = function(cb) {
+	for (var i = 0; i < this.length; i++) { //<= "this" refers to the future instance of an array to be built using the Array prototype
+		cb(this[i])
+	}
+}
+//console.log(Array.prototype) //<= forAll added as a method on the prototype
+
+array.forAll(incrementMore)
+//console.log(result) //<= logs: 2965
+
+// PART IV. Test forAll by making a new array 
+
+var newArray = []
+var pusher = function(input) {
+	newArray.push(input)
+}
+
+array.forAll(pusher)
+//console.log(newArray) //<= logs: [2, 2345, 335, 283]
+
+// PART V. Build and array of jsx <Book /> components, sending in data to each component. (WILL NEED REACT)
+// For each book in books: 
+// - create a new Book component
+// - pass data into its props
+// - push book onto array
+
+var books = [
+	{ author: "Jane Austen",
+	  title: "Pride and Prejudice"			
+	},
+
+	{ author: "Jesus the Author",
+	  title: "Quantum Mechanics for Dummies"			
+	},
+
+	{ author: "Leo Tolstoy",
+	  title: "Anna Karenina"			
+	}
+]
+
+var Book = React.createClass ({
+	render: function() {
+		return (
+			<div className="book">
+				<p className="title">{this.props.litData.title}</p>
+				<p className="author">{this.props.litData.author}</p>
+			</div>	
+		)
+	}
+})
+
+var jsxArray = []
+
+var bookMaker = function(bookObject) {
+	var component = <Book litData={bookObject}/>
+	jsxArray.push(component)
+
+}
+
+books.forAll(bookMaker)
+//console.log(jsxArray) //<= need React to see the final array of components, with each components having a object.props.litData key
+
 
 
