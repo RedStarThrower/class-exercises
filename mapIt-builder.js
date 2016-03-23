@@ -20,4 +20,25 @@ var doubled = myArray.mapIt(doubleNum)
 //console.log(doubled) //logs: [20, 40, 60]
 //console.log(myArray) //logs: [10,20,30]
 
+// Trey it with objects!
+
+var peopleArray = [{
+		person: "Sam",
+		location: "Houston"
+	}, {
+		person: "Jen",
+		location: "New York"
+	}, {
+		person: "Jack",
+		location: "Miami"
+	}
+]
+
+var getHTML = function(personObj) {
+	return '<p class="name">${personObj.person} ${personObj.location}</p>'
+}
+
+var pTagArray = peopleArray.mapIt(getHTML)
+//console.log(pTagArray) //<= logs: ["<p class="name">${personObj.person} ${personObj.location}</p>", "<p class="name">${personObj.person} ${personObj.location}</p>", "<p class="name">${personObj.person} ${personObj.location}</p>"]
+
 
