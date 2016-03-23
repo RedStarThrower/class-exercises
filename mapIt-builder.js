@@ -6,6 +6,8 @@ var doubleNum = function(num) {
 	return num * 2
 }
 
+//PART I. WITH A "FOR" LOOP
+
 Array.prototype.mapIt = function(cb) {
 	var newArray = []
 	for (var i = 0; i < this.length; i++) {
@@ -41,4 +43,18 @@ var getHTML = function(personObj) {
 var pTagArray = peopleArray.mapIt(getHTML)
 //console.log(pTagArray) //<= logs: ["<p class="name">${personObj.person} ${personObj.location}</p>", "<p class="name">${personObj.person} ${personObj.location}</p>", "<p class="name">${personObj.person} ${personObj.location}</p>"]
 
+//PART II. WITH A forEach
 
+Array.prototype.mapIt = function(cb) {
+	var newArray = []
+	this.forEach(function(element) { //<= forEach doesn't return anything, so function has to be modified for each specific element in the array
+		var transfomedElement = cb(element)
+		newArray.push(transfomedElement)
+	})
+	return newArray
+}
+
+var doubled = myArray.mapIt(doubleNum)
+
+//console.log(doubled) //logs: [20, 40, 60]
+//console.log(myArray) //logs: [10,20,30]
