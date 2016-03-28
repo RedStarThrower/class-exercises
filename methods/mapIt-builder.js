@@ -22,7 +22,7 @@ var doubled = myArray.mapIt(doubleNum)
 //console.log(doubled) //logs: [20, 40, 60]
 //console.log(myArray) //logs: [10,20,30]
 
-// Trey it with objects!
+// Try it with objects!
 
 var peopleArray = [{
 		person: "Sam",
