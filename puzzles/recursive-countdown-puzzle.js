@@ -9,20 +9,9 @@ var countdown = function (startingNumber) {
 //console.log(countdown(12)) // logs: 12, 11 ... 0
 
 
+
 // PART II. RECUSRION
-
-// Write a function countdown2, that replicates this behavior without using any loop
-
-//Pseudocode: countdown(n)
-// print n
-// n -= 1 
-// print n
-// n -= 1
-// ...
-// repeat until n = 0 
-
-// If the algorithm involves calling the same function on a subset of data, you can use recursion to keep calling that function within itself until the subset is diminished (hits "the floor").
-
+//Write a function countdown2, that replicates this behavior without using any loop
 
 var countdown2 = function (startingNumber) {	
 	console.log(startingNumber)
